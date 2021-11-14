@@ -60,6 +60,86 @@ void H() {
 	glEnd(); 
 
 }
+void WC3D() {
+	glBegin(GL_QUAD_STRIP);
+	//front
+	glVertex3f(-.9, -.1, .1);
+	glVertex3f(-.8, -.1, .1);
+	glVertex3f(-.7, -.9, .1);
+	glVertex3f(-.6, -.9, .1);
+	glVertex3f(-.5, -.2, .1);
+	glVertex3f(-.4, -.2, .1);
+	glVertex3f(-.3, -.9, .1);
+	glVertex3f(-.2, -.9, .1);
+	glVertex3f(-.1, -.1, .1);
+	glVertex3f(0, -.1, .1);
+	glEnd();
+
+	//back
+	glBegin(GL_QUAD_STRIP);
+	glVertex3f(-.9, -.1, -.1);
+	glVertex3f(-.8, -.1, -.1);
+	glVertex3f(-.7, -.9, -.1);
+	glVertex3f(-.6, -.9, -.1);
+	glVertex3f(-.5, -.2, -.1);
+	glVertex3f(-.4, -.2, -.1);
+	glVertex3f(-.3, -.9, -.1);
+	glVertex3f(-.2, -.9, -.1);
+	glVertex3f(-.1, -.1, -.1);
+	glVertex3f(0, -.1, -.1);
+	glEnd();
+
+
+	//top
+	glBegin(GL_QUAD_STRIP);
+	glColor3f(0,0,1);
+	glVertex3f(-.9, -.1, .1);
+	glVertex3f(-.9, -.1, -.1);
+	glVertex3f(-.8, -.1, .1);
+	glVertex3f(-.8, -.1, -.1);
+
+	glVertex3f(-.644, -.72, .1);
+	glVertex3f(-.644, -.72, -.1);
+	glVertex3f(-.5, -.2, .1);
+	glVertex3f(-.5, -.2, -.1);
+
+	glVertex3f(-.4, -.2, .1);
+	glVertex3f(-.4, -.2, -.1);
+
+	glVertex3f(-.25, -.72, .1);
+	glVertex3f(-.25, -.72, -.1);
+
+	glVertex3f(-.1, -.1, .1);
+	glVertex3f(-.1, -.1, -.1);
+
+	glVertex3f(0, -.1, .1);
+	glVertex3f(0, -.1, -.1);
+
+	//right side
+	glVertex3f(-.2, -.9, .1);
+	glVertex3f(-.2, -.9, -.1);
+
+	//bottom
+	glVertex3f(-.3, -.9, .1);
+	glVertex3f(-.3, -.9, -.1);
+
+	glVertex3f(-.45, -.38, .1);
+	glVertex3f(-.45, -.38, -.1);
+
+	glVertex3f(-.6, -.9, .1);
+	glVertex3f(-.6, -.9, -.1);
+
+	glVertex3f(-.7, -.9, .1);
+	glVertex3f(-.7, -.9, -.1);
+
+	//left side
+	glVertex3f(-.9, -.1, .1);
+	glVertex3f(-.9, -.1, -.1);
+	glVertex3f(-.8, -.1, .1);
+	glVertex3f(-.8, -.1, -.1);
+
+	glEnd();
+}
 void WC() {
 	glBegin(GL_QUAD_STRIP);
 	glVertex2f(-.9, -.1);
@@ -75,95 +155,6 @@ void WC() {
 
 	glEnd();
 }
-void WC3D() {
-	glBegin(GL_QUAD_STRIP);
-	//front
-	glVertex3f(-.9, -.1,.5);
-	glVertex3f(-.8, -.1,.5);
-	glVertex3f(-.7, -.9,.5);
-	glVertex3f(-.6, -.9,.5);
-	glVertex3f(-.5, -.2,.5);
-	glVertex3f(-.4, -.2,.5);
-	glVertex3f(-.3, -.9,.5);
-	glVertex3f(-.2, -.9,.5);
-	glVertex3f(-.1, -.1,.5);
-	glVertex3f(0, -.1,.5);
-	glEnd();
-
-	//back
-	glBegin(GL_QUAD_STRIP);
-	glVertex3f(-.9, -.1, -.5);
-	glVertex3f(-.8, -.1, -.5);
-	glVertex3f(-.7, -.9, -.5);
-	glVertex3f(-.6, -.9, -.5);
-	glVertex3f(-.5, -.2, -.5);
-	glVertex3f(-.4, -.2, -.5);
-	glVertex3f(-.3, -.9, -.5);
-	glVertex3f(-.2, -.9, -.5);
-	glVertex3f(-.1, -.1, -.5);
-	glVertex3f(0, -.1, -.5);
-	glEnd();
-
-	
-
-	//top
-	glBegin(GL_QUAD_STRIP);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glVertex3f(-.9, -.1, .5);
-	glVertex3f(-.9, -.1, -.5);
-	glVertex3f(-.8, -.1, .5);
-	glVertex3f(-.8, -.1, -.5);
-
-	glVertex3f(-.644, -.72, .5);
-	glVertex3f(-.644, -.72, -.5);
-	glVertex3f(-.5, -.2, .5);
-	glVertex3f(-.5, -.2, -.5);
-
-	glVertex3f(-.4, -.2, .5);
-	glVertex3f(-.4, -.2, -.5);
-
-	glVertex3f(-.25, -.72, .5);
-	glVertex3f(-.25, -.72, -.5);
-
-	glVertex3f(-.1, -.1, .5);
-	glVertex3f(-.1, -.1, -.5);
-
-	glVertex3f(0, -.1, .5);
-	glVertex3f(0, -.1, -.5);
-
-	//right side
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(-.2,-.9,.5);
-	glVertex3f(-.2, -.9, -.5);
-	
-	
-	//bottom
-	glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(-.3, -.9, .5);
-	glVertex3f(-.3, -.9, -.5);
-
-	glVertex3f(-.45, -.38, .5);
-	glVertex3f(-.45, -.38, -.5);
-
-	glVertex3f(-.6, -.9, .5);
-	glVertex3f(-.6, -.9, -.5);
-
-	glVertex3f(-.7, -.9, .5);
-	glVertex3f(-.7, -.9, -.5);
-
-	//left side
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(-.9, -.1, .5);
-	glVertex3f(-.9, -.1, -.5);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glVertex3f(-.8, -.1, .5);
-	glVertex3f(-.8, -.1, -.5);
-
-
-
-	
-	glEnd();
-}
 void ws() {
 	glBegin(GL_QUAD_STRIP);
 	glVertex2f(0, -.05);
@@ -176,6 +167,76 @@ void ws() {
 	glVertex2f(.350, -.450);
 	glVertex2f(.4, -.05);
 	glVertex2f(.450, -.05);
+	glEnd();
+}
+void XC3D() {
+	//back
+	glBegin(GL_QUADS);
+	glVertex3f(0, .9,.1);
+	glVertex3f(.1, .9,.1);
+	glVertex3f(.6, .1,.1);
+	glVertex3f(.5, .1,.1);
+
+	glVertex3f(.6, .9,.1);
+	glVertex3f(.5, .9,.1);
+	glVertex3f(0, .1,.1);
+	glVertex3f(.1, .1,.1);
+
+	//FRONT
+	glVertex3f(0, .9, -.1);
+	glVertex3f(.1, .9, -.1);
+	glVertex3f(.6, .1, -.1);
+	glVertex3f(.5, .1, -.1);
+
+	glVertex3f(.6, .9, -.1);
+	glVertex3f(.5, .9, -.1);
+	glVertex3f(0, .1, -.1);
+	glVertex3f(.1, .1, -.1);
+	glEnd();
+
+
+	glBegin(GL_QUAD_STRIP);
+	//top
+	glVertex3f(0, .9, .1);
+	glVertex3f(0, .9, -.1);
+	glVertex3f(.1, .9, .1);
+	glVertex3f(.1, .9, -.1);
+
+	//right side
+	glColor3f(1,0,0);
+	glVertex3f(.6,.1,.1);
+	glVertex3f(.6,.1,-.1);
+
+	//bottom
+	glVertex3f(.5, .1, .1);
+	glVertex3f(.5, .1, -.1);
+
+	//left side
+	glVertex3f(0, .9, .1);
+	glVertex3f(0, .9, -.1);
+	glEnd();
+
+	glBegin(GL_QUAD_STRIP);
+	//top
+	glVertex3f(.6,.9,.1);
+	glVertex3f(.6, .9, -.1);
+	
+	glVertex3f(.5, .9, .1);
+	glVertex3f(.5, .9, -.1);
+
+	//left side
+	glVertex3f(0, .1, .1);
+	glVertex3f(0, .1, -.1);
+
+	//bottom
+	glVertex3f(.1, .1, .1);
+	glVertex3f(.1, .1, -.1);
+
+	//right side
+	glVertex3f(.6, .9, .1);
+	glVertex3f(.6, .9, -.1);
+
+	glVertex3f(.5, .9, .2);
 	glEnd();
 }
 void X() {
@@ -234,7 +295,7 @@ void display() {
 	//N();
 	//WC();
 	//ws();
-	//X();
+	XC3D();
 	//M();
 	WC3D();
 	glFlush();
