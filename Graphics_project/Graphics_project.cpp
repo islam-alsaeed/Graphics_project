@@ -1,4 +1,25 @@
 #include<GL/glut.h>
+double rotate_y = 0;
+double rotate_x = 0;
+void specialKeys(int key, int x, int y) {
+	//Right Arrow (rotate right - increase by 5 degree)
+	if (key == GLUT_KEY_RIGHT)
+		rotate_y += 5;
+
+	//Left Arrow (rotate left - decrease by 5 degree)
+	else if (key == GLUT_KEY_LEFT)
+		rotate_y -= 5;
+
+	//Up Arrow (rotate upwards - increase by 5 degree)
+	else if (key == GLUT_KEY_UP)
+		rotate_x += 5;
+
+	//Down Arrow (rotate downwards - decrease by 5 degree)
+	else if (key == GLUT_KEY_DOWN)
+		rotate_x -= 5;
+
+	glutPostRedisplay();
+}
 void A() {
 	glBegin(GL_QUAD_STRIP);
 	glVertex2f(-.3, 0);
@@ -51,14 +72,96 @@ void WC() {
 	glVertex2f(-.2, -.9);
 	glVertex2f(-.1, -.1);
 	glVertex2f(0,-.1);
-	
-	
-	
-	
-	
+
+	glEnd();
+}
+void WC3D() {
+	glBegin(GL_QUAD_STRIP);
+	//front
+	glVertex3f(-.9, -.1,.5);
+	glVertex3f(-.8, -.1,.5);
+	glVertex3f(-.7, -.9,.5);
+	glVertex3f(-.6, -.9,.5);
+	glVertex3f(-.5, -.2,.5);
+	glVertex3f(-.4, -.2,.5);
+	glVertex3f(-.3, -.9,.5);
+	glVertex3f(-.2, -.9,.5);
+	glVertex3f(-.1, -.1,.5);
+	glVertex3f(0, -.1,.5);
+	glEnd();
+
+	//back
+	glBegin(GL_QUAD_STRIP);
+	glVertex3f(-.9, -.1, -.5);
+	glVertex3f(-.8, -.1, -.5);
+	glVertex3f(-.7, -.9, -.5);
+	glVertex3f(-.6, -.9, -.5);
+	glVertex3f(-.5, -.2, -.5);
+	glVertex3f(-.4, -.2, -.5);
+	glVertex3f(-.3, -.9, -.5);
+	glVertex3f(-.2, -.9, -.5);
+	glVertex3f(-.1, -.1, -.5);
+	glVertex3f(0, -.1, -.5);
+	glEnd();
 
 	
 
+	//top
+	glBegin(GL_QUAD_STRIP);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glVertex3f(-.9, -.1, .5);
+	glVertex3f(-.9, -.1, -.5);
+	glVertex3f(-.8, -.1, .5);
+	glVertex3f(-.8, -.1, -.5);
+
+	glVertex3f(-.644, -.72, .5);
+	glVertex3f(-.644, -.72, -.5);
+	glVertex3f(-.5, -.2, .5);
+	glVertex3f(-.5, -.2, -.5);
+
+	glVertex3f(-.4, -.2, .5);
+	glVertex3f(-.4, -.2, -.5);
+
+	glVertex3f(-.25, -.72, .5);
+	glVertex3f(-.25, -.72, -.5);
+
+	glVertex3f(-.1, -.1, .5);
+	glVertex3f(-.1, -.1, -.5);
+
+	glVertex3f(0, -.1, .5);
+	glVertex3f(0, -.1, -.5);
+
+	//right side
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(-.2,-.9,.5);
+	glVertex3f(-.2, -.9, -.5);
+	
+	
+	//bottom
+	glColor3f(0.0f, 1.0f, 1.0f);
+	glVertex3f(-.3, -.9, .5);
+	glVertex3f(-.3, -.9, -.5);
+
+	glVertex3f(-.45, -.38, .5);
+	glVertex3f(-.45, -.38, -.5);
+
+	glVertex3f(-.6, -.9, .5);
+	glVertex3f(-.6, -.9, -.5);
+
+	glVertex3f(-.7, -.9, .5);
+	glVertex3f(-.7, -.9, -.5);
+
+	//left side
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(-.9, -.1, .5);
+	glVertex3f(-.9, -.1, -.5);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glVertex3f(-.8, -.1, .5);
+	glVertex3f(-.8, -.1, -.5);
+
+
+
+	
 	glEnd();
 }
 void ws() {
@@ -119,24 +222,35 @@ void N() {
 }
 void display() {
 //	glClearColor(1, 1, 1, 1);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glColor3f(.0f, 0.0f, 1.0f);
+	glLoadIdentity();
 
+	//Rotate when user changes rotate_x and rotate_y
+	//Angle, X, Y, Z
+	glRotatef(rotate_x, 1, 0, 0);
+	glRotatef(rotate_y, 0, 1, 0);
 	//A();
-//	N();
-
-	WC();
-	ws();
-//	X();
+	//N();
+	//WC();
+	//ws();
+	//X();
 	//M();
+	WC3D();
 	glFlush();
+	glutSwapBuffers();
+
 }
 void main(int argc,char** argv) {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RED);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glEnable(GL_DEPTH_TEST);
 	glutInitWindowPosition(10,10);
 	glutInitWindowSize(1280,720);
 	glutCreateWindow("Graphics Project");
+	glEnable(GL_DEPTH_TEST);
+
 	glutDisplayFunc(display);
+	glutSpecialFunc(specialKeys);	
 	glutMainLoop();
 }
