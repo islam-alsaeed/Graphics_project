@@ -60,9 +60,9 @@ void H() {
 	glEnd(); 
 
 }
-void WC3D() {
+void WC3D() {//drawing letter capital W in 3D
 	glBegin(GL_QUAD_STRIP);
-	//front
+	//back
 	glVertex3f(-.9, -.1, .1);
 	glVertex3f(-.8, -.1, .1);
 	glVertex3f(-.7, -.9, .1);
@@ -75,7 +75,7 @@ void WC3D() {
 	glVertex3f(0, -.1, .1);
 	glEnd();
 
-	//back
+	//front
 	glBegin(GL_QUAD_STRIP);
 	glVertex3f(-.9, -.1, -.1);
 	glVertex3f(-.8, -.1, -.1);
@@ -88,59 +88,70 @@ void WC3D() {
 	glVertex3f(-.1, -.1, -.1);
 	glVertex3f(0, -.1, -.1);
 	glEnd();
-
 
 	//top
 	glBegin(GL_QUAD_STRIP);
-	glColor3f(0,0,1);
+	glColor3f(0, 0, 1);
+	glVertex3f(-.9,-.1,-.1);
 	glVertex3f(-.9, -.1, .1);
-	glVertex3f(-.9, -.1, -.1);
-	glVertex3f(-.8, -.1, .1);
 	glVertex3f(-.8, -.1, -.1);
+	glVertex3f(-.8, -.1, .1);
 
-	glVertex3f(-.644, -.72, .1);
-	glVertex3f(-.644, -.72, -.1);
-	glVertex3f(-.5, -.2, .1);
-	glVertex3f(-.5, -.2, -.1);
-
-	glVertex3f(-.4, -.2, .1);
-	glVertex3f(-.4, -.2, -.1);
-
-	glVertex3f(-.25, -.72, .1);
-	glVertex3f(-.25, -.72, -.1);
-
-	glVertex3f(-.1, -.1, .1);
-	glVertex3f(-.1, -.1, -.1);
-
-	glVertex3f(0, -.1, .1);
-	glVertex3f(0, -.1, -.1);
-
-	//right side
-	glVertex3f(-.2, -.9, .1);
-	glVertex3f(-.2, -.9, -.1);
+	glVertex3f(-.6, -.9, -.1);
+	glVertex3f(-.6, -.9, .1);
 
 	//bottom
-	glVertex3f(-.3, -.9, .1);
+	glVertex3f(-.4, -.2,-.1);
+	glVertex3f(-.4, -.2, .1);
+
+	//top
+	glVertex3f(-.2, -.9, -.1);
+	glVertex3f(-.2, -.9, .1);
+
+	//right side
+	glVertex3f(0, -.1, -.1);
+	glVertex3f(0, -.1, .1);
+
+	//top
+	glVertex3f(-.1, -.1, -.1);
+	glVertex3f(-.1, -.1, .1);
+
 	glVertex3f(-.3, -.9, -.1);
+	glVertex3f(-.3, -.9, .1);
 
-	glVertex3f(-.45, -.38, .1);
-	glVertex3f(-.45, -.38, -.1);
+	//bottom
+	glVertex3f(-.5, -.2, -.1);
+	glVertex3f(-.5, -.2, .1);
 
+	//left side
+	glVertex3f(-.7, -.9, -.1);
+	glVertex3f(-.7, -.9, .1);
+
+	glVertex3f(-.9, -.1, -.1);
+	glVertex3f(-.9, -.1, .1);
+	glEnd();
+
+	//bottom
+	glBegin(GL_QUADS);
+	glVertex3f(-.7, -.9, -.1);
+	glVertex3f(-.7, -.9, .1);
 	glVertex3f(-.6, -.9, .1);
 	glVertex3f(-.6, -.9, -.1);
 
-	glVertex3f(-.7, -.9, .1);
-	glVertex3f(-.7, -.9, -.1);
+	glVertex3f(-.3, -.9, -.1);
+	glVertex3f(-.3, -.9, .1);
+	glVertex3f(-.2, -.9, .1);
+	glVertex3f(-.2, -.9, -.1);
 
-	//left side
-	glVertex3f(-.9, -.1, .1);
-	glVertex3f(-.9, -.1, -.1);
-	glVertex3f(-.8, -.1, .1);
-	glVertex3f(-.8, -.1, -.1);
+	//top
+	glVertex3f(-.5, -.2, -.1);
+	glVertex3f(-.5, -.2, .1);
+	glVertex3f(-.4, -.2, .1);
+	glVertex3f(-.4, -.2, -.1);
 
 	glEnd();
 }
-void WC() {
+void WC() {//drawing letter capital W in 2D
 	glBegin(GL_QUAD_STRIP);
 	glVertex2f(-.9, -.1);
 	glVertex2f(-.8, -.1);
@@ -169,7 +180,7 @@ void ws() {
 	glVertex2f(.450, -.05);
 	glEnd();
 }
-void XC3D() {
+void XC3D() {//drawing letter capital X in 3D
 	//back
 	glBegin(GL_QUADS);
 	glVertex3f(0, .9,.1);
@@ -239,7 +250,7 @@ void XC3D() {
 	glVertex3f(.5, .9, .2);
 	glEnd();
 }
-void X() {
+void XC() {//drawing letter capital X in 2D
 	glBegin(GL_QUADS);
 	glVertex2f(0,.9);
 	glVertex2f(.1,.9);
