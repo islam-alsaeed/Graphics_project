@@ -1,6 +1,8 @@
 #include<GL/glut.h>
-double rotate_y = 0;
-double rotate_x = 0;
+double rotate_y = 0, rotate_x = 0;
+double  translate_x = 0, translate_y = 0;
+double scale_x = 1, scale_y = 1,scale_z=1;
+double small_factor = .6;
 void specialKeys(int key, int x, int y) {
 	//Right Arrow (rotate right - increase by 5 degree)
 	if (key == GLUT_KEY_RIGHT)
@@ -20,6 +22,7 @@ void specialKeys(int key, int x, int y) {
 
 	glutPostRedisplay();
 }
+
 void A() {
 	glBegin(GL_QUAD_STRIP);
 	glVertex2f(-.3, 0);
@@ -62,8 +65,13 @@ void H() {
 }
 void WC3D() {//drawing letter capital W in 3D
 	glBegin(GL_QUAD_STRIP);
+	float startingPoint_x = -.9;
+	float startingPoint_y = -.1;
+	float zAxis = .1;
+	float changeFactor = .1;
 	//back
-	glVertex3f(-.9, -.1, .1);
+	glVertex3f(startingPoint_x,startingPoint_y,zAxis);
+//	glVertex3f(-.9, -.1, .1);
 	glVertex3f(-.8, -.1, .1);
 	glVertex3f(-.7, -.9, .1);
 	glVertex3f(-.6, -.9, .1);
@@ -151,6 +159,10 @@ void WC3D() {//drawing letter capital W in 3D
 
 	glEnd();
 }
+void ws3D() {
+	glScalef(small_factor,small_factor,small_factor);
+	WC3D();
+}
 void WC() {//drawing letter capital W in 2D
 	glBegin(GL_QUAD_STRIP);
 	glVertex2f(-.9, -.1);
@@ -167,18 +179,8 @@ void WC() {//drawing letter capital W in 2D
 	glEnd();
 }
 void ws() {
-	glBegin(GL_QUAD_STRIP);
-	glVertex2f(0, -.05);
-	glVertex2f(.05, -.05);
-	glVertex2f(.1, -.45);
-	glVertex2f(.15, -.45);
-	glVertex2f(.2, -.1);
-	glVertex2f(.25, -.1);
-	glVertex2f(.3, -.450);
-	glVertex2f(.350, -.450);
-	glVertex2f(.4, -.05);
-	glVertex2f(.450, -.05);
-	glEnd();
+	glScalef(small_factor,small_factor,0);
+	WC();
 }
 void XC3D() {//drawing letter capital X in 3D
 	//back
@@ -250,6 +252,10 @@ void XC3D() {//drawing letter capital X in 3D
 	glVertex3f(.5, .9, .2);
 	glEnd();
 }
+void xs3D() {//drawing letter small x in 3D
+	glScalef(small_factor,small_factor,small_factor);
+	XC3D();
+}
 void XC() {//drawing letter capital X in 2D
 	glBegin(GL_QUADS);
 	glVertex2f(0,.9);
@@ -262,6 +268,10 @@ void XC() {//drawing letter capital X in 2D
 	glVertex2f(0, .1);
 	glVertex2f(.1, .1);
 	glEnd();
+}
+void xs() {//drawing letter small x in 2D
+	glScalef(small_factor,small_factor,0);
+	XC();
 }
 void M() {
 	glBegin(GL_QUAD_STRIP);
@@ -302,17 +312,78 @@ void display() {
 	//Angle, X, Y, Z
 	glRotatef(rotate_x, 1, 0, 0);
 	glRotatef(rotate_y, 0, 1, 0);
+
+	glTranslatef(translate_x, translate_y, 0);
+	glScalef(scale_x, scale_y, scale_z);
 	//A();
 	//N();
 	//WC();
 	//ws();
+	//XC();
+	//xs();
 	XC3D();
+	xs3D();
 	//M();
 	WC3D();
+	ws3D();
 	glFlush();
 	glutSwapBuffers();
 
 }
+
+void keyboard_func(unsigned char key, int x, int y) {
+	//For Translation
+	switch (key)
+	{
+	case 'w':
+	case 'W':
+		if (translate_y > 2)
+			translate_y = -2;
+		else
+			translate_y += 0.01;
+		break;
+
+	case 's':
+	case 'S':
+		if (translate_y < -2)
+			translate_y = 2;
+		else
+			translate_y -= 0.01;
+		break;
+
+	case 'd':
+	case 'D':
+		if (translate_x > 2)
+			translate_x = -2;
+		else
+			translate_x += 0.01;
+		break;
+
+	case 'a':
+	case 'A':
+		if (translate_y < -2)
+			translate_y = 2;
+		else
+			translate_x -= 0.01;
+		break;
+
+		//For Scaling
+	case '+':
+		scale_x += 0.01;
+		scale_y += 0.01;
+		scale_z += 0.01;
+		break;
+
+	case '-':
+		scale_x -= 0.01;
+		scale_y -= 0.01;
+		scale_z -= 0.01;
+		break;
+	}
+
+	glutPostRedisplay();
+}
+
 void main(int argc,char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -324,5 +395,6 @@ void main(int argc,char** argv) {
 
 	glutDisplayFunc(display);
 	glutSpecialFunc(specialKeys);	
+	glutKeyboardFunc(keyboard_func);
 	glutMainLoop();
 }
