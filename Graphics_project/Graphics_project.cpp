@@ -3,6 +3,7 @@ double rotate_y = 0, rotate_x = 0;
 double  translate_x = 0, translate_y = 0;
 double scale_x = 1, scale_y = 1,scale_z=1;
 double small_factor = .6;
+int overlap = 0, mode,draw_W=0, draw_w = 0;
 void specialKeys(int key, int x, int y) {
 	//Right Arrow (rotate right - increase by 5 degree)
 	if (key == GLUT_KEY_RIGHT)
@@ -64,104 +65,112 @@ void H() {
 
 }
 void WC3D() {//drawing letter capital W in 3D
+	
 	glBegin(GL_QUAD_STRIP);
-	float startingPoint_x = -.9;
-	float startingPoint_y = -.1;
-	float zAxis = .1;
-	float changeFactor = .1;
+	//float startingPoint_x = -.9;
+	//float startingPoint_y = -.1;
+	//float zAxis = .1;
+	//float changeFactor = .1;
+	//glVertex3f(startingPoint_x,startingPoint_y,zAxis);
+	
 	//back
-	glVertex3f(startingPoint_x,startingPoint_y,zAxis);
-//	glVertex3f(-.9, -.1, .1);
-	glVertex3f(-.8, -.1, .1);
-	glVertex3f(-.7, -.9, .1);
-	glVertex3f(-.6, -.9, .1);
-	glVertex3f(-.5, -.2, .1);
-	glVertex3f(-.4, -.2, .1);
-	glVertex3f(-.3, -.9, .1);
-	glVertex3f(-.2, -.9, .1);
-	glVertex3f(-.1, -.1, .1);
-	glVertex3f(0, -.1, .1);
+	glVertex3f(-.9, .9, .1);
+	glVertex3f(-.8, .9, .1);
+	glVertex3f(-.7, .1, .1);
+	glVertex3f(-.6, .1, .1);
+	glVertex3f(-.5, .8, .1);
+	glVertex3f(-.4, .8, .1);
+	glVertex3f(-.3, .1, .1);
+	glVertex3f(-.2, .1, .1);
+	glVertex3f(-.1, .9, .1);
+	glVertex3f(0, .9, .1);
 	glEnd();
 
 	//front
 	glBegin(GL_QUAD_STRIP);
-	glVertex3f(-.9, -.1, -.1);
-	glVertex3f(-.8, -.1, -.1);
-	glVertex3f(-.7, -.9, -.1);
-	glVertex3f(-.6, -.9, -.1);
-	glVertex3f(-.5, -.2, -.1);
-	glVertex3f(-.4, -.2, -.1);
-	glVertex3f(-.3, -.9, -.1);
-	glVertex3f(-.2, -.9, -.1);
-	glVertex3f(-.1, -.1, -.1);
-	glVertex3f(0, -.1, -.1);
+	glVertex3f(-.9, .9, -.1);
+	glVertex3f(-.8, .9, -.1);
+	glVertex3f(-.7, .1, -.1);
+	glVertex3f(-.6, .1, -.1);
+	glVertex3f(-.5, .8, -.1);
+	glVertex3f(-.4, .8, -.1);
+	glVertex3f(-.3, .1, -.1);
+	glVertex3f(-.2, .1, -.1);
+	glVertex3f(-.1, .9, -.1);
+	glVertex3f(0, .9, -.1);
 	glEnd();
 
 	//top
 	glBegin(GL_QUAD_STRIP);
 	glColor3f(0, 0, 1);
-	glVertex3f(-.9,-.1,-.1);
-	glVertex3f(-.9, -.1, .1);
-	glVertex3f(-.8, -.1, -.1);
-	glVertex3f(-.8, -.1, .1);
-
-	glVertex3f(-.6, -.9, -.1);
-	glVertex3f(-.6, -.9, .1);
-
+	glVertex3f(-.9,.9,-.1);
+	glVertex3f(-.9, .9, .1);
+	glVertex3f(-.8, .9, -.1);
+	glVertex3f(-.8, .9, .1);
 	//bottom
-	glVertex3f(-.4, -.2,-.1);
-	glVertex3f(-.4, -.2, .1);
+	glVertex3f(-.6, .1, -.1);
+	glVertex3f(-.6, .1, .1);
 
 	//top
-	glVertex3f(-.2, -.9, -.1);
-	glVertex3f(-.2, -.9, .1);
+	glVertex3f(-.4, .8,-.1);
+	glVertex3f(-.4, .8, .1);
+
+	//bottom
+	glVertex3f(-.2, .1, -.1);
+	glVertex3f(-.2, .1, .1);
 
 	//right side
-	glVertex3f(0, -.1, -.1);
-	glVertex3f(0, -.1, .1);
+	glVertex3f(0, .9, -.1);
+	glVertex3f(0, .9, .1);
 
 	//top
-	glVertex3f(-.1, -.1, -.1);
-	glVertex3f(-.1, -.1, .1);
-
-	glVertex3f(-.3, -.9, -.1);
-	glVertex3f(-.3, -.9, .1);
-
+	glVertex3f(-.1, .9, -.1);
+	glVertex3f(-.1, .9, .1);
 	//bottom
-	glVertex3f(-.5, -.2, -.1);
-	glVertex3f(-.5, -.2, .1);
+	glVertex3f(-.3, .1, -.1);
+	glVertex3f(-.3, .1, .1);
+
+	//top
+	glVertex3f(-.5, .8, -.1);
+	glVertex3f(-.5, .8, .1);
 
 	//left side
-	glVertex3f(-.7, -.9, -.1);
-	glVertex3f(-.7, -.9, .1);
+	glVertex3f(-.7, .1, -.1);
+	glVertex3f(-.7, .1, .1);
 
-	glVertex3f(-.9, -.1, -.1);
-	glVertex3f(-.9, -.1, .1);
+	glVertex3f(-.9, .9, -.1);
+	glVertex3f(-.9, .9, .1);
 	glEnd();
 
 	//bottom
 	glBegin(GL_QUADS);
-	glVertex3f(-.7, -.9, -.1);
-	glVertex3f(-.7, -.9, .1);
-	glVertex3f(-.6, -.9, .1);
-	glVertex3f(-.6, -.9, -.1);
+	glVertex3f(-.7, .1, -.1);
+	glVertex3f(-.7, .1, .1);
+	glVertex3f(-.6, .1, .1);
+	glVertex3f(-.6, .1, -.1);
 
-	glVertex3f(-.3, -.9, -.1);
-	glVertex3f(-.3, -.9, .1);
-	glVertex3f(-.2, -.9, .1);
-	glVertex3f(-.2, -.9, -.1);
+	glVertex3f(-.3, .1, -.1);
+	glVertex3f(-.3, .1, .1);
+	glVertex3f(-.2, .1, .1);
+	glVertex3f(-.2, .1, -.1);
 
 	//top
-	glVertex3f(-.5, -.2, -.1);
-	glVertex3f(-.5, -.2, .1);
-	glVertex3f(-.4, -.2, .1);
-	glVertex3f(-.4, -.2, -.1);
+	glVertex3f(-.5, .8, -.1);
+	glVertex3f(-.5, .8, .1);
+	glVertex3f(-.4, .8, .1);
+	glVertex3f(-.4, .8, -.1);
 
 	glEnd();
+	
 }
 void ws3D() {
 	glScalef(small_factor,small_factor,small_factor);
 	WC3D();
+	
+	//glLoadIdentity();
+	
+	//glTranslatef(translate_x, translate_y, 0);
+
 }
 void WC() {//drawing letter capital W in 2D
 	glBegin(GL_QUAD_STRIP);
@@ -181,6 +190,8 @@ void WC() {//drawing letter capital W in 2D
 void ws() {
 	glScalef(small_factor,small_factor,0);
 	WC();
+	glTranslatef(50, 0, 0);
+
 }
 void XC3D() {//drawing letter capital X in 3D
 	//back
@@ -302,6 +313,30 @@ void N() {
 	glVertex2f(-.4, -.1);
 	glEnd();
 }
+void v() {
+	glBegin(GL_QUAD_STRIP);
+	glVertex3f(-.1,.1,0);
+	glVertex3f(-.1, .1, -.1);
+	glVertex3f(0,0,0);
+	glVertex3f(0,0,-.1);
+	glVertex3f(.1,.1,0);
+	glVertex3f(.1,.1,-.1);
+	glEnd();
+	
+	/*
+	glBegin(GL_LINES);
+	glVertex2f(0, 1);
+	glVertex2f(0, -1);
+	glVertex2f(-1, 0);
+	glVertex2f(1,0);
+	glEnd();
+	glColor3f(1, 1, 1);
+	glBegin(GL_LINE_STRIP);
+	glVertex2f(-.1,.1);
+	glVertex2f(0, 0);
+	glVertex2f(.1, .1);
+	glEnd();*/
+}
 void display() {
 //	glClearColor(1, 1, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -321,11 +356,20 @@ void display() {
 	//ws();
 	//XC();
 	//xs();
-	XC3D();
-	xs3D();
+	//XC3D();
+	//xs3D();
 	//M();
-	WC3D();
-	ws3D();
+	if (draw_W > 0) {
+		for (int i = 0; i < draw_W; i++){
+			WC3D();
+		}
+
+	}
+	if (draw_w) {
+		ws3D();
+	}
+	
+	//v();
 	glFlush();
 	glutSwapBuffers();
 
@@ -333,54 +377,54 @@ void display() {
 
 void keyboard_func(unsigned char key, int x, int y) {
 	//For Translation
-	switch (key)
+	mode = glutGetModifiers();
+	if ((key == 'w' || key == 'W') && mode==GLUT_ACTIVE_ALT )
 	{
-	case 'w':
-	case 'W':
+
+
 		if (translate_y > 2)
 			translate_y = -2;
 		else
 			translate_y += 0.01;
-		break;
 
-	case 's':
-	case 'S':
+	}
+	else if(key == 'w' ) {
+		draw_w +=1 ;
+		//glutPostRedisplay();
+	}
+	else if (key == 'W') {
+		draw_W += 1;
+	}
+	/*
+	else if ((key == 's' || key == 'S') && key == GLUT_ACTIVE_SHIFT) {
 		if (translate_y < -2)
 			translate_y = 2;
 		else
 			translate_y -= 0.01;
-		break;
-
-	case 'd':
-	case 'D':
+	}
+	else if ((key == 'd' || key == 'D')&&key==GLUT_ACTIVE_SHIFT) {
 		if (translate_x > 2)
 			translate_x = -2;
 		else
 			translate_x += 0.01;
-		break;
-
-	case 'a':
-	case 'A':
+	}
+	else if ((key == 'a' || key == 'A') && key == GLUT_ACTIVE_SHIFT) {
 		if (translate_y < -2)
 			translate_y = 2;
 		else
 			translate_x -= 0.01;
-		break;
-
+	}
+	else if (key == '+') {
 		//For Scaling
-	case '+':
 		scale_x += 0.01;
 		scale_y += 0.01;
 		scale_z += 0.01;
-		break;
-
-	case '-':
+	}
+	else if (key == '-') {
 		scale_x -= 0.01;
 		scale_y -= 0.01;
 		scale_z -= 0.01;
-		break;
-	}
-
+	}*/
 	glutPostRedisplay();
 }
 
