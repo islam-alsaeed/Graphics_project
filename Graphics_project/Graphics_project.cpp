@@ -3,7 +3,8 @@ double rotate_y = 0, rotate_x = 0;
 double  translate_x = 0, translate_y = 0;
 double scale_x = 1, scale_y = 1,scale_z=1;
 double small_factor = .6;
-int overlap = 0, mode,draw_W=0, draw_w = 0;
+int overlap = 0, mode,draw_W=0, draw_w = 0 ,letter_end=0;
+char letter;
 void specialKeys(int key, int x, int y) {
 	//Right Arrow (rotate right - increase by 5 degree)
 	if (key == GLUT_KEY_RIGHT)
@@ -102,7 +103,6 @@ void WC3D() {//drawing letter capital W in 3D
 
 	//top
 	glBegin(GL_QUAD_STRIP);
-	glColor3f(0, 0, 1);
 	glVertex3f(-.9,.9,-.1);
 	glVertex3f(-.9, .9, .1);
 	glVertex3f(-.8, .9, -.1);
@@ -161,11 +161,20 @@ void WC3D() {//drawing letter capital W in 3D
 	glVertex3f(-.4, .8, -.1);
 
 	glEnd();
-	
+	//if(capital)
+	glTranslatef(.9, translate_y, 0);
+
+		letter_end = 0.9;
+	/*else
+	{
+		letter_end += 0.9 * small_factor;
+	}*/
 }
 void ws3D() {
 	glScalef(small_factor,small_factor,small_factor);
 	WC3D();
+	glScalef(1/small_factor,1/small_factor,1/small_factor);
+
 	
 	//glLoadIdentity();
 	
@@ -337,10 +346,22 @@ void v() {
 	glVertex2f(.1, .1);
 	glEnd();*/
 }
+void draw_letter(void (*letterfun)(),int number,bool capital) {
+	float r=0;
+	for (int H = 0; H < number; H++) {
+		letterfun();
+		/*if (capital)
+			glTranslatef(.9, translate_y, 0);
+		else
+		{
+			glTranslatef(.9*small_factor, translate_y, 0);
+		}*/
+	}
+}
 void display() {
 //	glClearColor(1, 1, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glColor3f(.0f, 0.0f, 1.0f);
+	//glColor3f(.0f, 0.0f, 1.0f);
 	glLoadIdentity();
 
 	//Rotate when user changes rotate_x and rotate_y
@@ -359,14 +380,18 @@ void display() {
 	//XC3D();
 	//xs3D();
 	//M();
-	if (draw_W > 0) {
+	if (draw_W ) {
+		draw_letter(WC3D, draw_W, true);
+		/*
 		for (int i = 0; i < draw_W; i++){
-			WC3D();
-		}
+			
+			
+			glColor3f(1, i/10, 1);
 
+		}*/
 	}
 	if (draw_w) {
-		ws3D();
+		draw_letter(ws3D,draw_w,false);
 	}
 	
 	//v();
@@ -380,8 +405,6 @@ void keyboard_func(unsigned char key, int x, int y) {
 	mode = glutGetModifiers();
 	if ((key == 'w' || key == 'W') && mode==GLUT_ACTIVE_ALT )
 	{
-
-
 		if (translate_y > 2)
 			translate_y = -2;
 		else
@@ -390,25 +413,23 @@ void keyboard_func(unsigned char key, int x, int y) {
 	}
 	else if(key == 'w' ) {
 		draw_w +=1 ;
-		//glutPostRedisplay();
 	}
 	else if (key == 'W') {
 		draw_W += 1;
 	}
-	/*
-	else if ((key == 's' || key == 'S') && key == GLUT_ACTIVE_SHIFT) {
+	else if ((key == 's' || key == 'S') && mode == GLUT_ACTIVE_ALT) {
 		if (translate_y < -2)
 			translate_y = 2;
 		else
 			translate_y -= 0.01;
 	}
-	else if ((key == 'd' || key == 'D')&&key==GLUT_ACTIVE_SHIFT) {
+	else if ((key == 'd' || key == 'D')&& mode ==GLUT_ACTIVE_ALT) {
 		if (translate_x > 2)
 			translate_x = -2;
 		else
 			translate_x += 0.01;
 	}
-	else if ((key == 'a' || key == 'A') && key == GLUT_ACTIVE_SHIFT) {
+	else if ((key == 'a' || key == 'A') && mode == GLUT_ACTIVE_ALT) {
 		if (translate_y < -2)
 			translate_y = 2;
 		else
@@ -424,7 +445,7 @@ void keyboard_func(unsigned char key, int x, int y) {
 		scale_x -= 0.01;
 		scale_y -= 0.01;
 		scale_z -= 0.01;
-	}*/
+	}
 	glutPostRedisplay();
 }
 
