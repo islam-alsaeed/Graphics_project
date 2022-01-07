@@ -164,22 +164,12 @@ void WC3D() {//drawing letter capital W in 3D
 	//if(capital)
 	glTranslatef(.9, translate_y, 0);
 
-		letter_end = 0.9;
-	/*else
-	{
-		letter_end += 0.9 * small_factor;
-	}*/
+		//letter_end = 0.9;
 }
 void ws3D() {
 	glScalef(small_factor,small_factor,small_factor);
 	WC3D();
 	glScalef(1/small_factor,1/small_factor,1/small_factor);
-
-	
-	//glLoadIdentity();
-	
-	//glTranslatef(translate_x, translate_y, 0);
-
 }
 void WC() {//drawing letter capital W in 2D
 	glBegin(GL_QUAD_STRIP);
