@@ -1,10 +1,17 @@
 #include<GL/glut.h>
+#include<stdio.h>  
 double rotate_y = 0, rotate_x = 0;
 double  translate_x = 0, translate_y = 0;
 double scale_x = 1, scale_y = 1,scale_z=1;
 double small_factor = .6;
-int overlap = 0, mode,draw_W=0, draw_w = 0 ,letter_end=0;
-char letter;
+int mode;
+float overlap = 0;
+struct node
+{
+	char data;
+	struct node* next;
+};
+struct node* head=NULL,*tail=head;	
 void specialKeys(int key, int x, int y) {
 	//Right Arrow (rotate right - increase by 5 degree)
 	if (key == GLUT_KEY_RIGHT)
@@ -65,15 +72,9 @@ void H() {
 	glEnd(); 
 
 }
-void WC3D() {//drawing letter capital W in 3D
+void WC3D(bool capital) {//drawing letter capital W in 3D
 	
 	glBegin(GL_QUAD_STRIP);
-	//float startingPoint_x = -.9;
-	//float startingPoint_y = -.1;
-	//float zAxis = .1;
-	//float changeFactor = .1;
-	//glVertex3f(startingPoint_x,startingPoint_y,zAxis);
-	
 	//back
 	glVertex3f(-.9, .9, .1);
 	glVertex3f(-.8, .9, .1);
@@ -161,15 +162,19 @@ void WC3D() {//drawing letter capital W in 3D
 	glVertex3f(-.4, .8, -.1);
 
 	glEnd();
-	//if(capital)
-	glTranslatef(.9, translate_y, 0);
-
-		//letter_end = 0.9;
+	overlap = .91;
+	if (!capital){
+		//to stop the next letter from scaling to smaller
+		glScalef(1 / small_factor, 1 / small_factor, 1 / small_factor);
+	}
+		glTranslatef(overlap, translate_y, 0);
 }
-void ws3D() {
+void ws3D(bool capital=false) {
 	glScalef(small_factor,small_factor,small_factor);
-	WC3D();
-	glScalef(1/small_factor,1/small_factor,1/small_factor);
+	//to return the beiging of the letter after scalling
+	glTranslatef(-small_factor, translate_y, 0);
+	WC3D(capital);
+	
 }
 void WC() {//drawing letter capital W in 2D
 	glBegin(GL_QUAD_STRIP);
@@ -336,17 +341,27 @@ void v() {
 	glVertex2f(.1, .1);
 	glEnd();*/
 }
-void draw_letter(void (*letterfun)(),int number,bool capital) {
+void draw_letter() {
 	float r=0;
+
+	for (struct node *element = head; element != NULL; element = element->next) {
+		if (element->data == 'W')
+			WC3D(true);
+		else if(element->data == 'w')
+		{
+			ws3D(false);
+		}
+	}
+	/*
 	for (int H = 0; H < number; H++) {
-		letterfun();
+		letterfun(capital);
 		/*if (capital)
 			glTranslatef(.9, translate_y, 0);
 		else
 		{
 			glTranslatef(.9*small_factor, translate_y, 0);
-		}*/
-	}
+		}
+	}*/
 }
 void display() {
 //	glClearColor(1, 1, 1, 1);
@@ -370,21 +385,11 @@ void display() {
 	//XC3D();
 	//xs3D();
 	//M();
-	if (draw_W ) {
-		draw_letter(WC3D, draw_W, true);
-		/*
-		for (int i = 0; i < draw_W; i++){
-			
-			
-			glColor3f(1, i/10, 1);
-
-		}*/
-	}
-	if (draw_w) {
-		draw_letter(ws3D,draw_w,false);
-	}
 	
-	//v();
+	if (head != NULL)
+		draw_letter();
+
+
 	glFlush();
 	glutSwapBuffers();
 
@@ -401,11 +406,21 @@ void keyboard_func(unsigned char key, int x, int y) {
 			translate_y += 0.01;
 
 	}
-	else if(key == 'w' ) {
-		draw_w +=1 ;
-	}
-	else if (key == 'W') {
-		draw_W += 1;
+	else if(key == 'w'||key=='W') {
+		struct node* temp;
+		temp = new node;
+		temp->data = key;
+		temp->next = NULL;
+		if (head == NULL) {
+			head = temp;
+			tail = head;
+		}
+		else
+		{
+			tail->next = temp;
+			tail = temp;
+		}
+		printf("the enterd key = %c\n", tail->data);
 	}
 	else if ((key == 's' || key == 'S') && mode == GLUT_ACTIVE_ALT) {
 		if (translate_y < -2)
