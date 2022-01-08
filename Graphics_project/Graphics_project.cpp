@@ -3,7 +3,7 @@
 double rotate_y = 0, rotate_x = 0;
 double  translate_x = 0, translate_y = 0;
 double scale_x = 1, scale_y = 1,scale_z=1;
-double small_factor = .6;
+double small_factor = .6,xposistion=0,yposition=0;
 int mode;
 float overlap = 0;
 struct node
@@ -162,12 +162,13 @@ void WC3D(bool capital) {//drawing letter capital W in 3D
 	glVertex3f(-.4, .8, -.1);
 
 	glEnd();
-	overlap = .91;
+	overlap = .92;
 	if (!capital){
 		//to stop the next letter from scaling to smaller
 		glScalef(1 / small_factor, 1 / small_factor, 1 / small_factor);
 	}
-		glTranslatef(overlap, translate_y, 0);
+
+	glTranslatef(overlap, translate_y, 0);
 }
 void ws3D(bool capital=false) {
 	glScalef(small_factor,small_factor,small_factor);
@@ -197,79 +198,92 @@ void ws() {
 	glTranslatef(50, 0, 0);
 
 }
-void XC3D() {//drawing letter capital X in 3D
+void XC3D(bool capital) {//drawing letter capital X in 3D
 	//back
 	glBegin(GL_QUADS);
-	glVertex3f(0, .9,.1);
-	glVertex3f(.1, .9,.1);
-	glVertex3f(.6, .1,.1);
-	glVertex3f(.5, .1,.1);
+	glVertex3f(-.3, .9, .1);
+	glVertex3f(-.4, .9, .1);
+	glVertex3f(-.9, .1, .1);
+	glVertex3f(-.8, .1, .1);
+	glEnd();
 
-	glVertex3f(.6, .9,.1);
-	glVertex3f(.5, .9,.1);
-	glVertex3f(0, .1,.1);
-	glVertex3f(.1, .1,.1);
+	glBegin(GL_QUADS);
+	glVertex3f(-.9, .9, .1);
+	glVertex3f(-.8, .9, .1);
+	glVertex3f(-.3, .1,.1);
+	glVertex3f(-.4, .1,.1);	
+	glEnd();
 
 	//FRONT
-	glVertex3f(0, .9, -.1);
-	glVertex3f(.1, .9, -.1);
-	glVertex3f(.6, .1, -.1);
-	glVertex3f(.5, .1, -.1);
+	glBegin(GL_QUADS);
+	glVertex3f(-.9, .9, -.1);
+	glVertex3f(-.8, .9, -.1);
+	glVertex3f(-.3, .1, -.1);
+	glVertex3f(-.4, .1, -.1);
+	glEnd();
 
-	glVertex3f(.6, .9, -.1);
-	glVertex3f(.5, .9, -.1);
-	glVertex3f(0, .1, -.1);
-	glVertex3f(.1, .1, -.1);
+	glBegin(GL_QUADS);
+	glVertex3f(-.3, .9, -.1);
+	glVertex3f(-.4, .9, -.1);
+	glVertex3f(-.9, .1, -.1);
+	glVertex3f(-.8, .1, -.1);
 	glEnd();
 
 
 	glBegin(GL_QUAD_STRIP);
 	//top
-	glVertex3f(0, .9, .1);
-	glVertex3f(0, .9, -.1);
-	glVertex3f(.1, .9, .1);
-	glVertex3f(.1, .9, -.1);
-
-	//right side
-	glColor3f(1,0,0);
-	glVertex3f(.6,.1,.1);
-	glVertex3f(.6,.1,-.1);
-
-	//bottom
-	glVertex3f(.5, .1, .1);
-	glVertex3f(.5, .1, -.1);
+	glVertex3f(-.3, .9, .1);
+	glVertex3f(-.3, .9, -.1);
+	glVertex3f(-.4, .9, .1);
+	glVertex3f(-.4, .9, -.1);
 
 	//left side
-	glVertex3f(0, .9, .1);
-	glVertex3f(0, .9, -.1);
+	glVertex3f(-.9,.1,.1);
+	glVertex3f(-.9,.1,-.1);
+
+	//bottom
+	glVertex3f(-.8, .1, .1);
+	glVertex3f(-.8, .1, -.1);
+
+	//right side
+	glVertex3f(-.3, .9, .1);
+	glVertex3f(-.3, .9, -.1);
 	glEnd();
 
 	glBegin(GL_QUAD_STRIP);
 	//top
-	glVertex3f(.6,.9,.1);
-	glVertex3f(.6, .9, -.1);
+	glVertex3f(-.9,.9,.1);
+	glVertex3f(-.9, .9, -.1);
 	
-	glVertex3f(.5, .9, .1);
-	glVertex3f(.5, .9, -.1);
+	glVertex3f(-.8, .9, .1);
+	glVertex3f(-.8, .9, -.1);
 
-	//left side
-	glVertex3f(0, .1, .1);
-	glVertex3f(0, .1, -.1);
+	//RIGHT side
+	glVertex3f(-.3, .1, .1);
+	glVertex3f(-.3, .1, -.1);
 
 	//bottom
-	glVertex3f(.1, .1, .1);
-	glVertex3f(.1, .1, -.1);
+	glVertex3f(-.4, .1, .1);
+	glVertex3f(-.4, .1, -.1);
 
-	//right side
-	glVertex3f(.6, .9, .1);
-	glVertex3f(.6, .9, -.1);
-
-	glVertex3f(.5, .9, .2);
+	//LEFT side
+	glVertex3f(-.9, .9, .1);
+	glVertex3f(-.9, .9, -.1);
 	glEnd();
+
+	overlap = .63;
+	if (!capital) {
+		overlap = .73 ;//
+		//to stop the next letter from scaling to smaller
+		glScalef(1 / small_factor, 1 / small_factor, 1 / small_factor);
+	}
+	glTranslatef(overlap, translate_y, 0);
 }
-void xs3D() {//drawing letter small x in 3D
+void xs3D(bool capital=false) {//drawing letter small x in 3D
 	glScalef(small_factor,small_factor,small_factor);
-	XC3D();
+	//to return the beiging of the letter after scalling
+	glTranslatef(-small_factor, translate_y, 0);
+	XC3D(capital);
 }
 void XC() {//drawing letter capital X in 2D
 	glBegin(GL_QUADS);
@@ -342,26 +356,17 @@ void v() {
 	glEnd();*/
 }
 void draw_letter() {
-	float r=0;
-
 	for (struct node *element = head; element != NULL; element = element->next) {
 		if (element->data == 'W')
 			WC3D(true);
-		else if(element->data == 'w')
-		{
-			ws3D(false);
-		}
+		else if (element->data == 'w')
+			ws3D();
+		else if (element->data == 'X')
+			XC3D(true);
+		else if (element->data == 'x')
+			xs3D();
+
 	}
-	/*
-	for (int H = 0; H < number; H++) {
-		letterfun(capital);
-		/*if (capital)
-			glTranslatef(.9, translate_y, 0);
-		else
-		{
-			glTranslatef(.9*small_factor, translate_y, 0);
-		}
-	}*/
 }
 void display() {
 //	glClearColor(1, 1, 1, 1);
@@ -389,7 +394,6 @@ void display() {
 	if (head != NULL)
 		draw_letter();
 
-
 	glFlush();
 	glutSwapBuffers();
 
@@ -405,22 +409,6 @@ void keyboard_func(unsigned char key, int x, int y) {
 		else
 			translate_y += 0.01;
 
-	}
-	else if(key == 'w'||key=='W') {
-		struct node* temp;
-		temp = new node;
-		temp->data = key;
-		temp->next = NULL;
-		if (head == NULL) {
-			head = temp;
-			tail = head;
-		}
-		else
-		{
-			tail->next = temp;
-			tail = temp;
-		}
-		printf("the enterd key = %c\n", tail->data);
 	}
 	else if ((key == 's' || key == 'S') && mode == GLUT_ACTIVE_ALT) {
 		if (translate_y < -2)
@@ -439,6 +427,22 @@ void keyboard_func(unsigned char key, int x, int y) {
 			translate_y = 2;
 		else
 			translate_x -= 0.01;
+	}
+	else if (key == 'w' || key == 'W'||key=='x'||key=='X') {
+		struct node* temp;
+		temp = new node;
+		temp->data = key;
+		temp->next = NULL;
+		if (head == NULL) {
+			head = temp;
+			tail = head;
+		}
+		else
+		{
+			tail->next = temp;
+			tail = temp;
+		}
+		printf("the enterd key = %c\n", tail->data);
 	}
 	else if (key == '+') {
 		//For Scaling
